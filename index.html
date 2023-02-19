@@ -46,11 +46,22 @@
   </div>
   <script>
     const overlay = document.querySelector(".page-content");
-    window.addEventListener("mousemove", e => {
-      const posX = e.clientX * 100 / window.innerWidth;
-      const posY = e.clientY * 100 / window.innerHeight;
-      overlay.setAttribute("style", `background: radial-gradient(circle at ${posX}% ${posY}%, #a9d0ff1f, #121212f8 10%); -webkit-background-clip:text;`);
-    })
+    let isTouched = false;
+
+    const handleAnimation = (e) => {
+      const isTouchEvent = e.type === "touchmove"
+
+      const posX = (isTouchEvent ? e.touches[0]?.clientX : e.clientX) * 100 / window.innerWidth;
+      const posY = (isTouchEvent ? e.touches[0]?.clientY : e.clientY) * 100 / window.innerHeight;
+
+      if (!isTouchEvent || isTouched) {
+        overlay.setAttribute("style", `background: radial-gradient(circle at ${posX}% ${posY}%, #a9d0ff1f, #121212f8 10%); -webkit-background-clip:text;`);
+      }
+    }
+    window.addEventListener("mousemove", handleAnimation)
+    window.addEventListener("touchstart", () => isTouched = true)
+    window.addEventListener("touchend", () => isTouched = false)
+    window.addEventListener("touchmove", handleAnimation)
   </script>
 </body>
 
