@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hidden BG Text</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+
+    *,
+    *::after,
+    *::before {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', monospace;
+      background-color: #111;
+    }
+
+    .page-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-size: 15rem;
+      font-weight: 500;
+      color: transparent;
+      background: radial-gradient(circle at 0% 0%, #a9d0ff1f, #121212f8 10%);
+      -webkit-background-clip: text;
+      cursor: default;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="page-content">
+    <h1>
+      YOUNG
+    </h1>
+  </div>
+  <script>
+    const overlay = document.querySelector(".page-content");
+    window.addEventListener("mousemove", e => {
+      const posX = e.clientX * 100 / window.innerWidth;
+      const posY = e.clientY * 100 / window.innerHeight;
+      overlay.setAttribute("style", `background: radial-gradient(circle at ${posX}% ${posY}%, #a9d0ff1f, #121212f8 10%); -webkit-background-clip:text;`);
+    })
+  </script>
+</body>
+
+</html>
